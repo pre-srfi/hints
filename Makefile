@@ -1,4 +1,4 @@
-FILENAME=template
+FILENAME=pre-srfi-hints
 
 all:
 	ln -sf README.md $(FILENAME).md

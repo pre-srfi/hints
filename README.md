@@ -1,6 +1,6 @@
-# SRFI nnn: Title
+# SRFI nnn: hints
 
-by Firstname Lastname, Another Person, Third Person
+by Amirouche Boubekki, ...
 
 ## Status
 
@@ -38,9 +38,60 @@ GitHub's version of Markdown can make tables. For example:
 
 ## Specification
 
-??? detailed specification. This should be detailed enough that a
-conforming implementation could be completely created from this
-description.
+### `(hint-specification? obj) any? → boolean?`
+
+Returns `#t` if `OBJ` is a valid hint specification. Otherwise returns `#f`.
+
+`OBJ` may be:
+
+- a predicate procedure;
+
+- a list of predicate procedures;
+
+- a list of predicate procedures where the last pair `cdr` is not the
+  empty list, but a predicate procedure. In the latter case, the
+  predicate that ends the list will be used to check the rest
+  arguments;
+
+- A list where items are valid according to the above rules.
+
+### `(make-hint [documentation] arguments values raise) string? hint-specification? hint-specification? hint-specification → hint?` syntax
+
+When `DOCUMENTATION` is absent. The implementation may construct a
+documentation string based on `ARGUMENTS`, `VALUES` and `RAISE`.
+Otherwise, the default value of `DOCUMENTATION` is the empty string.
+
+Expand into a hint object.
+
+### `(hint? obj)`
+
+### `(hint-check-arguments? hint arguments) hint? list? → boolean?`
+
+Given `HINT`, returns `#t` if `ARGUMENTS` are valid
+arguments. `ARGUMENTS` are supposed to be all arguments passed to a
+procedure including rest arguments. `ARGUMENTS` may be the empty list.
+
+### `(hint-check-values? hint values) hint? list? → boolean?`
+
+Given `HINT`, returns `#t` if `VALUES` are valid values. `VALUES` are
+supposed to be all values returned by a procedure, hence `VALUES` may
+be the empty list.
+
+### `(hint-check-raise? hint obj) hint? any? → boolean?`
+
+Given `HINT`, returns `#t` if `OBJ` is a valid object to raise.
+
+### `(hint-documentation hint) hint? → string?`
+
+Returns the documentation associated with `HINT`.
+
+### `(hint [documentation] arguments values raise)` syntax
+
+`hint` may appear anywhere a definition can appear. It may associate
+`(make-hint DOCUMENTATION ARGUMENTS VALUES RAISE)` to the lexically
+nearest previously defined lambda or procedure so that it is possible
+to retrieve the documentation of the lambda or procedure from a REPL
+e.g. using a `procedure-documentation` form.
 
 ## Examples
 
