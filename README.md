@@ -38,11 +38,11 @@ GitHub's version of Markdown can make tables. For example:
 
 ## Specification
 
-### `(any-of? predicate? ...)`
+### `(any-of predicate? ...)`
 
-### `(every-of? predicate? ...)`
+### `(every-of predicate? ...)`
 
-### `(each-of? predicate? ... predicaten?)`
+### `(each-of predicate? ... predicaten?)`
 
 ### `(anything? obj ...)`
 
@@ -54,11 +54,11 @@ The default value of `ARGUMENTS?`, `VALUES?` and `RAISE?` is `anything?`.
 
 ### `(hint? obj) anything? → boolean?`
 
-### `(hint-arguments? hint obj ...) hint? anything? → procedure?`
+### `(hint-arguments? hint obj ...) hint? anything? → boolean?`
 
-### `(hint-values? hint obj ...) hint? anything? → procedure?`
+### `(hint-values? hint obj ...) hint? anything? → boolean?`
 
-### `(hint-raise? hint obj) hint? anything? → predicate?`
+### `(hint-raise? hint obj) hint? anything? → boolean?`
 
 ### `(hint-documentation hint) hint? → string?`
 
