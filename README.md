@@ -38,60 +38,33 @@ GitHub's version of Markdown can make tables. For example:
 
 ## Specification
 
-### `(hint-specification? obj) any? → boolean?`
+### `(any-of? predicate? ...)`
 
-Returns `#t` if `OBJ` is a valid hint specification. Otherwise returns `#f`.
+### `(every-of? predicate? ...)`
 
-`OBJ` may be:
+### `(each-of? predicate? ... predicaten?)`
 
-- a predicate procedure;
+### `(anything? obj ...)`
 
-- a list of predicate procedures;
+### `(false? obj)`
 
-- a list of predicate procedures where the last pair `cdr` is not the
-  empty list, but a predicate procedure. In the latter case, the
-  predicate that ends the list will be used to check the rest
-  arguments;
+### `(make-hint documentation [arguments? [values? [raise?]]]) string? procedure? procedure? procedure? → hint?`
 
-- A list where items are valid according to the above rules.
+The default value of `ARGUMENTS?`, `VALUES?` and `RAISE?` is `anything?`.
 
-### `(make-hint [documentation] arguments values raise) string? hint-specification? hint-specification? hint-specification → hint?` syntax
+### `(hint? obj) anything? → boolean?`
 
-When `DOCUMENTATION` is absent. The implementation may construct a
-documentation string based on `ARGUMENTS`, `VALUES` and `RAISE`.
-Otherwise, the default value of `DOCUMENTATION` is the empty string.
+### `(hint-arguments? hint obj ...) hint? anything? → procedure?`
 
-Expand into a hint object.
+### `(hint-values? hint obj ...) hint? anything? → procedure?`
 
-### `(hint? obj)`
-
-### `(hint-check-arguments? hint arguments) hint? list? → boolean?`
-
-Given `HINT`, returns `#t` if `ARGUMENTS` are valid
-arguments. `ARGUMENTS` are supposed to be all arguments passed to a
-procedure including rest arguments. `ARGUMENTS` may be the empty list.
-
-### `(hint-check-values? hint values) hint? list? → boolean?`
-
-Given `HINT`, returns `#t` if `VALUES` are valid values. `VALUES` are
-supposed to be all values returned by a procedure, hence `VALUES` may
-be the empty list.
-
-### `(hint-check-raise? hint obj) hint? any? → boolean?`
-
-Given `HINT`, returns `#t` if `OBJ` is a valid object to raise.
+### `(hint-raise? hint obj) hint? anything? → predicate?`
 
 ### `(hint-documentation hint) hint? → string?`
 
 Returns the documentation associated with `HINT`.
 
-### `(hint [documentation] arguments values raise)` syntax
-
-`hint` may appear anywhere a definition can appear. It may associate
-`(make-hint DOCUMENTATION ARGUMENTS VALUES RAISE)` to the lexically
-nearest previously defined lambda or procedure so that it is possible
-to retrieve the documentation of the lambda or procedure from a REPL
-e.g. using a `procedure-documentation` form.
+### `(define/hint identifier hint expr)`
 
 ## Examples
 
